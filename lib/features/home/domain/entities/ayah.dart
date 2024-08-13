@@ -8,4 +8,8 @@ class Ayah {
   late int number;
   late int surahNumber;
   late String text;
+  @override
+  String toString(){
+    return 'surah Number:$number,text:$text ';
+  }
 }

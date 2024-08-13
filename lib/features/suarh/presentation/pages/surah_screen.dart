@@ -16,37 +16,38 @@ class SurahScreen extends StatelessWidget {
       create: (context) => SuarhCubit(di<FetchSurahAndAyahsUseCase>())
         ..fetchSurahAndAyahs(int.parse(surahId)),
       child: Scaffold(
-        body: SafeArea(
-          child: BlocBuilder<SuarhCubit, SuarhState>(
-            builder: (context, state) {
-              var temp = BlocProvider.of<SuarhCubit>(context).mergedTextSpan;
-              if (state is QuranLoading) {
-                return Center(child: CircularProgressIndicator());
-              } else if (state is FetchSurahSucess) {
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ListView(
-                    children: [
-                      RichText(
-                        text: temp!,
-                        textDirection: TextDirection.rtl,
-                      ),
-                    ],
-                  ),
-                );
-              } else if (state is FetchSurahError) {
-                return Center(child: Text(state.error));
-              }
-
-              return Center(child: Text('Select a Surah'));
-            },
+        body: Directionality(
+          textDirection: TextDirection.rtl,
+          child: SafeArea(
+            child: BlocBuilder<SuarhCubit, SuarhState>(
+              builder: (context, state) {
+                var temp = BlocProvider.of<SuarhCubit>(context).mergedTextSpan;
+                if (state is QuranLoading) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (state is FetchSurahSucess) {
+                  return Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ListView(
+                      children: [
+                        RichText(
+                          text: temp!,
+                        ),
+                      ],
+                    ),
+                  );
+                } else if (state is FetchSurahError) {
+                  return Center(child: Text(state.error));
+                }
+          
+                return Center(child: Text('Select a Surah'));
+              },
+            ),
           ),
         ),
         floatingActionButton: BlocBuilder<SuarhCubit, SuarhState>(
           builder: (context, state) {
             return FloatingActionButton(
               onPressed: () {
-                // Example: Fetch Surah 1 (Al-Fatiha)
                 BlocProvider.of<SuarhCubit>(context)
                     .fetchSurahAndAyahs(int.parse(surahId) + 3);
               },
