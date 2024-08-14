@@ -11,4 +11,5 @@ abstract class  QuranRepository {
   }
 
   Future hasQuranData() async {}
+  Future getsurahsdata()async{}
 }

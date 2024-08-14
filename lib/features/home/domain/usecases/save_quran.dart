@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:quranapp/features/home/domain/entities/surah.dart';
 import 'package:quranapp/features/home/domain/repositories/quran_repository.dart';
 @LazySingleton()
 class SaveQuranDataIfEmpty {
@@ -6,7 +7,7 @@ class SaveQuranDataIfEmpty {
 
   SaveQuranDataIfEmpty(this.repository);
 
-  Future<void> call() async {
+  Future<List<Surah>> call() async {
     // Check if Surah collection is empty
     final hasData = await repository.hasQuranData();
     print("rr"+hasData.toString());
@@ -14,5 +15,8 @@ class SaveQuranDataIfEmpty {
       // Save Quran data if the collection is empty
       await repository.saveQuranData();
     }
+     List<Surah> data= await repository.getsurahsdata();
+
+    return data;
   }
 }

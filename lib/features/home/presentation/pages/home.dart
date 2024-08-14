@@ -1,36 +1,59 @@
+
 import 'package:flutter/material.dart';
-import 'package:quranapp/core/resources/route_manager.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:quranapp/features/home/presentation/controller/quran_data/quran_data_cubit.dart';
+
+import '../widgets/home_body.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: Container(
-        color: Colors.greenAccent,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-ElevatedButton(
-            onPressed: () {
-              RouteManager.goTo(RouteManager.surah,
-                  arguments: '2');
-            },
-            style: ElevatedButton.styleFrom(
-              minimumSize: Size(200, 50), backgroundColor: Colors.white, // Button color
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12), // Small curve
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15), // Adjust padding if needed
-            ),
-            child: Text('Custom Button', style: TextStyle(color: Colors.greenAccent),),
+    return  Directionality(
+      textDirection:TextDirection.rtl,
+      child: DefaultTabController(
+        initialIndex: 1,
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor:Colors.greenAccent,
+            title: const Text('القران الكريم'),
+            actions: [
+              IconButton(onPressed: (){}, icon:const Icon( Icons.search)),
+              IconButton(onPressed: (){}, icon:const Icon( Icons.settings))
+            ],
           ),
-        
-          ],
+          body:     BlocBuilder<QuranDataCubit, QuranDataState>(
+            builder: (context, state) {
+              if(state is FetchSurahDataSuccess){
+                    return HomeBody(cubit: BlocProvider.of<QuranDataCubit>(context));
+              }
+              if(state is FetchSurahDataLoading){
+                return const SizedBox(
+                  width: 80,
+                  height: 80,
+                  child: CircularProgressIndicator(),
+                );
+              }
+              return const Center(
+                child: Text('Home'),
+              );
+            },
+          ),
         ),
       ),
     );
+  }
+}
+
+String translateToArabic(String input) {
+  if (input == "Madinah") {
+    return "مدنية";
+  } else if (input == "Makkah") {
+    return "مكية";
+  } else {
+    return input; // Return the original string if it doesn't match "Madinah" or "Makkah"
   }
 }

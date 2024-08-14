@@ -8,7 +8,7 @@ ThemeData themeData = ThemeData(
   scaffoldBackgroundColor: ColorsManager.scaffoldBgColor,
   colorScheme: ColorScheme.fromSeed(
     seedColor: ColorsManager.primary,
-    primary: ColorsManager.primary,
+    //primary: ColorsManager.primary,
   ),
   navigationBarTheme: const NavigationBarThemeData(
     height: 84,

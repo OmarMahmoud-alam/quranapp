@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:isar/isar.dart';
 import 'package:quranapp/core/data/data_sources/local_data_source.dart';
 import 'package:quranapp/features/home/domain/entities/ayah.dart';
 import 'package:quranapp/features/home/domain/entities/surah.dart';
@@ -25,7 +26,7 @@ class QuranRepositoryImpl implements QuranRepository {
     for (int i = 1; i <= quran.totalSurahCount; i++) {
       final surah = Surah()
         ..number = i
-        ..name = quran.getSurahName(i)
+        ..name = quran.getSurahNameArabic(i)
         ..ayahCount = quran.getVerseCount(i);
 
       surahList.add(surah);
@@ -56,6 +57,12 @@ class QuranRepositoryImpl implements QuranRepository {
     return surahCount > 0;
   }
 
+@override
+Future<List<Surah>> getsurahsdata() async {
+    final isar = localDataSource.isarInstance;
+    final surahs =  await isar.surahs.where().findAll();
+    return surahs;
+  }
 
 
 }

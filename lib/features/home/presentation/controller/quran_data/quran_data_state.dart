@@ -8,3 +8,12 @@ sealed class QuranDataState extends Equatable {
 }
 
 final class QuranDataInitial extends QuranDataState {}
+
+final class FetchSurahDataSuccess extends QuranDataState {}
+
+final class FetchSurahDataFail extends QuranDataState {
+  final String error;
+
+  const FetchSurahDataFail({required this.error});
+}
+final class FetchSurahDataLoading extends QuranDataState {}

@@ -12,6 +12,12 @@ const TextStyle normalTitleHeaderBlack = TextStyle(
   fontWeight: FontWeight.w600,
   color: ColorsManager.black,
 );
+const TextStyle normalbodyBlack = TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
+  height: 1.6,
+  color: ColorsManager.black,
+);
 const TextStyle smallTitleHeaderBlack = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w400,
@@ -23,7 +29,7 @@ const TextStyle smallTitleHeadergrey = TextStyle(
   color: ColorsManager.textGrey,
 );
 const TextStyle tinyTitleHeaderBlack = TextStyle(
-  fontSize: 12,
+  fontSize: 11,
   fontWeight: FontWeight.w400,
   color: ColorsManager.black,
 );

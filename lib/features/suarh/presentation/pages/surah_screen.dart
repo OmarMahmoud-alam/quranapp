@@ -5,6 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quranapp/core/infrastructure/di.dart';
 import 'package:quranapp/features/suarh/domain/usecases/fetch.dart';
 import 'package:quranapp/features/suarh/presentation/cubit/suarh_cubit.dart';
+import 'package:quranapp/features/suarh/presentation/widgets/surah.dart';
+
+import '../widgets/surah_body.dart';
 
 class SurahScreen extends StatelessWidget {
   const SurahScreen({super.key, required this.surahId});
@@ -21,25 +24,15 @@ class SurahScreen extends StatelessWidget {
           child: SafeArea(
             child: BlocBuilder<SuarhCubit, SuarhState>(
               builder: (context, state) {
-                var temp = BlocProvider.of<SuarhCubit>(context).mergedTextSpan;
                 if (state is QuranLoading) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is FetchSurahSucess) {
-                  return Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: ListView(
-                      children: [
-                        RichText(
-                          text: temp!,
-                        ),
-                      ],
-                    ),
-                  );
+                  return const SurahBody();
                 } else if (state is FetchSurahError) {
                   return Center(child: Text(state.error));
                 }
           
-                return Center(child: Text('Select a Surah'));
+                return const Center(child: Text('Select a Surah'));
               },
             ),
           ),
