@@ -9,10 +9,12 @@ class FetchSurahAndAyahsUseCase {
   Future<Map<String, dynamic>> call(int surahNumber) async {
     final surahName = await repository.fetchSurahName(surahNumber);
     final ayahs = await repository.fetchAyahsBySurahNumber(surahNumber);
+    final ayahsbypages = await repository.fetchSurahAyahsSurahbypage(surahNumber);
 
     return {
       'surahName': surahName,
       'ayahs': ayahs,
+      'ayahspages': ayahsbypages,
     };
   }
 }

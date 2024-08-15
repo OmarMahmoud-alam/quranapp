@@ -10,6 +10,7 @@ part 'suarh_state.dart';
 class SuarhCubit extends Cubit<SuarhState> {
    final FetchSurahAndAyahsUseCase fetchSurahAndAyahsUseCase;
  List<Ayah>  ayahslist=[];
+ List<Map<int, List<Ayah>>> ayahByPages=[];
  String?  surahName;
   SuarhCubit(this.fetchSurahAndAyahsUseCase) : super(SuarhInitial());
 
@@ -19,6 +20,8 @@ class SuarhCubit extends Cubit<SuarhState> {
       final result = await fetchSurahAndAyahsUseCase(surahNumber);
              ayahslist = result['ayahs'];
 surahName= result['surahName'];
+ayahByPages= result['ayahspages'];
+log("length:${ayahByPages.length}");
       emit(FetchSurahSucess());
     } catch (e) {
       emit(FetchSurahError("Failed to load Surah and Ayahs"));

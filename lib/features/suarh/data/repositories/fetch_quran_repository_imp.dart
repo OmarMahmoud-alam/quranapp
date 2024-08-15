@@ -18,4 +18,9 @@ class FetchQuranRepositoryImpl implements FetchQuranRepository {
   Future<List<Ayah>> fetchAyahsBySurahNumber(int surahNumber) async {
     return await localDataSource.getAyahsBySurahNumber(surahNumber);
   }
+     @override
+    Future<List<Map<int, List<Ayah>>>> fetchSurahAyahsSurahbypage(int surahNumber) async {
+
+    return await localDataSource.getSurahAyahTextGroupedByPages(surahNumber);
+    }
 }
