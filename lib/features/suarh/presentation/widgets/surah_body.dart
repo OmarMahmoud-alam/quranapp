@@ -12,13 +12,13 @@ class SurahBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: ListView.builder(
+      child: ListView.separated(
         itemCount:  BlocProvider.of<SuarhCubit>(context).ayahByPages.length+1,
+        separatorBuilder:(BuildContext context, int index)=>SizedBox(height: 2,) ,
         itemBuilder: (BuildContext context, int index) {
           if(index==0){
             return   AppBarOfSurah();
           }
-                    print(BlocProvider.of<SuarhCubit>(context).ayahByPages[index-1].values.expand((ayahs) => ayahs).toList());
 
           return      MergedAyahTextSpan(ayahs: BlocProvider.of<SuarhCubit>(context).ayahByPages[index-1].values.expand((ayahs) => ayahs).toList() );
         },

@@ -5,11 +5,18 @@ part 'quran_page.g.dart';
 @collection
 class QuranPage {
   Id id = Isar.autoIncrement;
-  final surahPageData = IsarLinks<SurahPageData>();
+  var surahPageData = IsarLinks<SurahPageData>();
 
   final int pagenumber;
 
   QuranPage( {required this.pagenumber});
+    @override
+  String toString() {
+    final surahPageDataString = surahPageData.map((data) => data.toString()).join(', ');
+
+    return 'QuranPage(id: $id, pagenumber: $pagenumber, surahPageData: [$surahPageDataString])';
+  }
+
 }
 
 

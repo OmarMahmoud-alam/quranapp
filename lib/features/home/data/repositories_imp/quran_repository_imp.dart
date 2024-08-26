@@ -35,30 +35,36 @@ class QuranRepositoryImpl implements QuranRepository {
 
 
 Future<void> _saveQuranPages(Isar isar) async {
-  final quranPages = _generateQuranPages();
+    await isar.writeTxn(() async {
 
-  await isar.writeTxn(() async {
-    // Save SurahPageData first and get their IDs
-    final List<SurahPageData> allSurahPageData = [];
-    for (var quranPage in quranPages) {
-      allSurahPageData.addAll(quranPage.surahPageData);
+  final List<QuranPage> quranPages = [];
+
+    for (int i = 0; i < 604; i++) {
+      // Generate SurahPageData for this page
+      final surahPageDataList = _generateQuranPages(i);
+
+      // Save SurahPageData first
+      await isar.surahPageDatas.putAll(surahPageDataList);
+
+      // Create QuranPage and link the SurahPageData
+      final quranPage = QuranPage(pagenumber: i + 1);
+      quranPage.surahPageData.addAll(surahPageDataList);
+
+      // Add QuranPage to the list
+      quranPages.add(quranPage);
     }
-    
-    final savedSurahPageData = await isar.surahPageDatas.putAll(allSurahPageData);
 
-    // Now set the IDs to the links
-    /*for (var quranPage in quranPages) {
-      quranPage.surahPageData.set(
-        savedSurahPageData.where((data) => quranPage.surahPageData.contains(data)).toList(),
-      );
-      await isar.quranPages.put(quranPage);
-    }*/
+    // Save all QuranPages with their linked SurahPageData
+    await isar.quranPages.putAll(quranPages);
+    for (var quranPage in quranPages) {
+      await quranPage.surahPageData.save();
+    }
   });
 
-  log((await isar.quranPages.count()).toString());
+  //log((await isar.quranPages.count()).toString());
 }
 
-List<QuranPage> _generateQuranPages() {
+List<QuranPage> _generateQuranPages2(isar ) {
   List<QuranPage> quranPage = [];
 
   for (int i = 0; i < 604; i++) {
@@ -69,7 +75,6 @@ List<QuranPage> _generateQuranPages() {
         end: data['end'],
       );
     }).toList();
-
     var quranPageItem = QuranPage(pagenumber: i + 1);
     quranPageItem.surahPageData.addAll(surahPageDataList);
 
@@ -79,7 +84,16 @@ List<QuranPage> _generateQuranPages() {
   return quranPage;
 }
 
-
+List<SurahPageData> _generateQuranPages(int index) {
+  // Assuming pageData is available and structured properly
+  return pageData[index].map<SurahPageData>((data) {
+    return SurahPageData(
+      surah: data['surah'],
+      start: data['start'],
+      end: data['end'],
+    );
+  }).toList();
+}
 
 
 

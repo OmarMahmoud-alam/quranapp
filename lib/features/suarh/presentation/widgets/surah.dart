@@ -64,6 +64,11 @@ void _resolveSameRow(List<GlobalKey<_WidgetSpanWrapperState>> keys) {
             _buildAyahTextSpan(ayah),
             _buildAyahNumberSpan(ayah, nextKey(),
 ),
+            TextSpan(
+      text: '',
+      style:normalbodyBlack
+    ),
+
           ]
         ],
       ),
