@@ -21,6 +21,22 @@ extension IsValidEmail on String {
     return replaceAll(exp, ' ');
   }
 }
+extension Arabic on int {
+String get intToArabic {
+  // Define the Arabic numerals (Unicode values)
+  const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+
+  // Convert the integer to a string
+  final numberString = this.toString();
+
+  // Map each digit to its Arabic numeral
+  final arabicNumberString = numberString.split('').map((digit) {
+    return arabicNumerals[int.parse(digit)];
+  }).join('');
+
+  return arabicNumberString;
+}
+}
 
 extension NavExtensions on BuildContext {
   RouteSettings getRouteSettings() => ModalRoute.of(this)!.settings;

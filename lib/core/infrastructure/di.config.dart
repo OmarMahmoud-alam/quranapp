@@ -25,6 +25,8 @@ import 'package:quranapp/features/suarh/data/repositories/fetch_quran_repository
 import 'package:quranapp/features/suarh/domain/repositories/fetch_quran_repository.dart'
     as _i8;
 import 'package:quranapp/features/suarh/domain/usecases/fetch.dart' as _i10;
+import 'package:quranapp/features/suarh/domain/usecases/fetch_ayah_per_page.dart'
+    as _i12;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -61,6 +63,8 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i10.FetchSurahAndAyahsUseCase(gh<_i8.FetchQuranRepository>()));
     gh.factory<_i11.QuranDataCubit>(
         () => _i11.QuranDataCubit(gh<_i7.SaveQuranDataIfEmpty>()));
+    gh.lazySingleton<_i12.FetchAyahsPageUseCase>(
+        () => _i12.FetchAyahsPageUseCase(gh<_i8.FetchQuranRepository>()));
     return this;
   }
 }

@@ -44,34 +44,33 @@ dependencies:
   bloc: ^8.1.4
   equatable: ^2.0.5
   flutter_bloc: ^8.1.6
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^4.0.0
   isar_generator: ^3.1.0+1
+  # Generating CLI: flutter packages pub run build_runner build
+  # Generating Cleaning CLI: flutter packages pub run build_runner clean
   build_runner: ^2.4.11
   injectable_generator: ^2.4.2
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
 
-# The following section is specific to Flutter packages.
 flutter:
 
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
+
   uses-material-design: true
   assets:
     - assets/image/
-
+  fonts:
+    - family: Uthmanic
+      fonts:
+        - asset: assets/fonts/quranfont.otf
+    - family: ArabQuran
+      fonts:
+        - asset: assets/fonts/arabquran.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

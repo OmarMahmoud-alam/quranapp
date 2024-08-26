@@ -73,4 +73,40 @@ final ayahTextBySurah = LinkedHashMap<int, List<Ayah>>();
   log("LKL:${pagesWithAyahs.length}");
   return pagesWithAyahs;
 }
+Future<List<Map<String, List<Ayah>>>> getAyahsByPageNumber(int pageNumber) async {
+  // Fetch the Quran page corresponding to the given page number
+  final quranPage = await _isarInstance.quranPages
+      .filter()
+      .pagenumberEqualTo(pageNumber)
+      .findFirst();
+
+  if (quranPage == null) {
+    // Return an empty list if the page number is not found
+    return [];
+  }
+
+  // Initialize a list to hold the Ayahs and Surah names on this page
+  final List<Map<String, List<Ayah>>> ayahsOnPageWithSurahNames = [];
+
+  for (var surahPageData in quranPage.surahPageData) {
+    // Fetch the Ayahs in the range of the Surah page data
+    final ayahs = await _isarInstance.ayahs
+        .filter()
+        .surahNumberEqualTo(surahPageData.surah)
+        .and()
+        .numberBetween(surahPageData.start, surahPageData.end)
+        .findAll();
+
+    // Fetch the Surah name using the Surah number
+    final surah = await _isarInstance.surahs.get(surahPageData.surah);
+    final surahName = surah?.name ?? 'Unknown Surah';
+
+    // Add the Surah name and Ayahs to the list
+    ayahsOnPageWithSurahNames.add({
+      surahName: ayahs,
+    });
+  }
+
+  return ayahsOnPageWithSurahNames;
+}
 }

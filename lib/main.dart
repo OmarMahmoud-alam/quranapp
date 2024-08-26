@@ -4,6 +4,7 @@ import 'package:quranapp/core/data/data_sources/local_data_source.dart';
 import 'package:quranapp/core/infrastructure/di.dart';
 import 'package:quranapp/core/resources/route_manager.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quranapp/core/theme/app_theme.dart';
 import 'package:quranapp/features/home/data/repositories_imp/quran_repository_imp.dart';
 import 'package:quranapp/features/home/domain/usecases/save_quran.dart';
 import 'package:quranapp/features/home/presentation/controller/quran_data/quran_data_cubit.dart';
@@ -40,10 +41,8 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner :false,
             navigatorKey: RouteManager.navigatorKey,
             routes: RouteManager.globalRoutes,
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
-            ),
+            
+            theme:AppTheme.theme,
             onGenerateRoute: RouteManager.onGenerateGlobalRoute,
             initialRoute: RouteManager.home,
           );

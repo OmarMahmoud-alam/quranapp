@@ -20,7 +20,7 @@ class SurahBody extends StatelessWidget {
             return   AppBarOfSurah();
           }
 
-          return      MergedAyahTextSpan(ayahs: BlocProvider.of<SuarhCubit>(context).ayahByPages[index-1].values.expand((ayahs) => ayahs).toList() );
+          return      MergedAyahTextSpan(ayahs: BlocProvider.of<SuarhCubit>(context).ayahByPages[index-1].values.expand((ayahs) => ayahs).toList(), pageNumber:  BlocProvider.of<SuarhCubit>(context).ayahByPages[index-1].keys.first, );
         },
       ),
       

@@ -16,7 +16,7 @@ class SurahScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SuarhCubit(di<FetchSurahAndAyahsUseCase>())
+      create: (context) => SuarhCubit(di<FetchSurahAndAyahsUseCase>(),di())
         ..fetchSurahAndAyahs(int.parse(surahId)),
       child: Scaffold(
         body: Directionality(
@@ -37,17 +37,7 @@ class SurahScreen extends StatelessWidget {
             ),
           ),
         ),
-        floatingActionButton: BlocBuilder<SuarhCubit, SuarhState>(
-          builder: (context, state) {
-            return FloatingActionButton(
-              onPressed: () {
-                BlocProvider.of<SuarhCubit>(context)
-                    .fetchSurahAndAyahs(int.parse(surahId) + 3);
-              },
-              child: Icon(Icons.next_plan),
-            );
-          },
-        ),
+        
       ),
     );
   }
