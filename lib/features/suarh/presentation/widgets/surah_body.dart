@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quranapp/features/suarh/presentation/cubit/suarh_cubit.dart';
+import 'package:quranapp/features/suarh/presentation/controller/surah-cubit/suarh_cubit.dart';
 import 'package:quranapp/features/suarh/presentation/widgets/surah.dart';
 
 class SurahBody extends StatelessWidget {
@@ -38,7 +38,7 @@ class AppBarOfSurah extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-    height: 30,
+    height: 60,
     child: Stack(
       children: [
           Align(

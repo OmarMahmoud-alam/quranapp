@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quranapp/core/infrastructure/di.dart';
 import 'package:quranapp/features/suarh/domain/usecases/fetch.dart';
-import 'package:quranapp/features/suarh/presentation/cubit/suarh_cubit.dart';
+import 'package:quranapp/features/suarh/presentation/controller/surah-cubit/suarh_cubit.dart';
 import 'package:quranapp/features/suarh/presentation/widgets/surah.dart';
 
 import '../widgets/surah_body.dart';

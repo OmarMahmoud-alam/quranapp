@@ -121,8 +121,8 @@ class MergedAyahTextSpan extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 3.0),
           child: SizedBox(
-            width: 30,
-            height: 30,
+            width: 35,
+            height: 35,
             child: Stack(
               children: [
                 Image.asset(
@@ -131,7 +131,7 @@ class MergedAyahTextSpan extends StatelessWidget {
                   height: 30,
                 ),
                 Align(
-                  child: Text(ayah.number.intToArabic,style: const TextStyle(fontFamily:Strings.fontFamilyofayah ),),
+                  child: Text(ayah.number.intToArabic,style: const TextStyle(fontFamily:Strings.fontFamilyofayah,fontSize: 16 ),),
                 ),
               ],
             ),
